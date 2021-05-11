@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:contatos_app/models/contato.model.dart';
 import 'package:contatos_app/repositories/contato.repository.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class CadastroView extends StatelessWidget {
+class EditaView extends StatelessWidget {
   Contato contato = new Contato();
   var _formKey = GlobalKey<FormState>();
 
@@ -14,15 +11,8 @@ class CadastroView extends StatelessWidget {
       BuildContext context, ContatoRepository repository) async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      if (await repository.create(contato)) {
-        Navigator.of(context).pop();
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Falha no cadastro"),
-          ),
-        );
-      }
+      await repository.update(contato);
+      Navigator.of(context).pop();
     }
   }
 

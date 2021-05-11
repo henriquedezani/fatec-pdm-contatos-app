@@ -1,12 +1,14 @@
-import 'dart:convert';
-
 import 'package:contatos_app/models/contato.model.dart';
 import 'package:contatos_app/repositories/contato.repository.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class ListaView extends StatelessWidget {
+class ListaView extends StatefulWidget {
+  @override
+  _ListaViewState createState() => _ListaViewState();
+}
+
+class _ListaViewState extends State<ListaView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +24,10 @@ class ListaView extends StatelessWidget {
             return ListTile(
               title: Text(contato.nome),
               subtitle: Text(contato.telefone),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () => repository.delete(contato.id),
+              ),
             );
           },
         );

@@ -15,7 +15,3 @@ class Contato {
     return {"id": id, "nome": nome, "telefone": telefone};
   }
 }
-
-// Contato c = Contato.fromJson(json);
-//
-// c.toJson()
